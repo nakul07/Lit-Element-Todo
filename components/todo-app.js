@@ -5,11 +5,16 @@ import {
 import "./todo-list.js";
 
 class TodoApp extends LitElement {
+   
   static get properties() {
     return {
       todoList: { type: Array },
     };
   }
+
+  /**
+   * Constructor function
+   */
   constructor() {
     super();
     this.todoList = [
@@ -19,6 +24,12 @@ class TodoApp extends LitElement {
     ];
   }
 
+  /**
+   * Renders html components.
+   *
+   * @returns html
+   *
+   */
   render() {
     return html`
       <style>
@@ -63,6 +74,9 @@ class TodoApp extends LitElement {
     `;
   }
 
+  /**
+   * adds new Todo
+   */
   _addTodo() {
     const input = this.shadowRoot.getElementById("todoInputField");
     const text = input.value;
@@ -72,11 +86,21 @@ class TodoApp extends LitElement {
     //this.requestUpdate();
   }
 
+  /**
+   * Removes the clicked Todo.
+   *
+   * @param {event} e
+   */
   _removeTodo(e) {
     this.todoList = this.todoList.filter((todo) => todo !== e.detail);
     // this.requestUpdate();
   }
 
+  /**
+   * Changes the todo to finished.
+   *
+   * @param {event} e
+   */
   _changeToFinished(e) {
     const { changedTodo, finished } = e.detail;
 
@@ -88,4 +112,8 @@ class TodoApp extends LitElement {
     });
   }
 }
+
+/**
+ * <todo-app></todo-app>
+ */
 window.customElements.define("todo-app", TodoApp);

@@ -10,11 +10,19 @@ class TodoList extends LitElement {
     };
   }
 
+  /**
+   * Constructor function
+   */
   constructor() {
     super();
     this.textDecoration = "line-through";
   }
 
+  /**
+   * Renders the html components
+   *
+   * @returns html
+   */
   render() {
     if (!this.todos) {
       return html``;
@@ -64,6 +72,12 @@ class TodoList extends LitElement {
     `;
   }
 
+  /**
+   * Changes the todo to completed todo
+   *
+   * @param {event} e
+   * @param {Array} changedTodo
+   */
   _changeTodoFinished(e, changedTodo) {
     const eventDetails = { changedTodo, finished: e.target.checked };
     this.dispatchEvent(
@@ -71,9 +85,17 @@ class TodoList extends LitElement {
     );
   }
 
+  /**
+   * Remove the clicked todo
+   *
+   * @param {Array} item
+   */
   _removeTodo(item) {
     this.dispatchEvent(new CustomEvent("remove-todo", { detail: item }));
   }
 }
 
+/**
+ * <todo-list><todo-list>
+ */
 window.customElements.define("todo-list", TodoList);
